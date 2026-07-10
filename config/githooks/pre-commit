@@ -1,0 +1,24 @@
+#!/bin/sh
+
+set -eu
+
+HOOK_DIR=$(CDPATH= cd "$(dirname "$0")" && pwd)
+PROJECT_ROOT=$(CDPATH= cd "$HOOK_DIR/../.." && pwd)
+REPO_ROOT=$(git -C "$PROJECT_ROOT" rev-parse --show-toplevel)
+PROJECT_PREFIX=$(git -C "$PROJECT_ROOT" rev-parse --show-prefix)
+
+STAGED_FILES=$(git -C "$REPO_ROOT" diff --cached --name-only --diff-filter=ACMR)
+
+if [ -z "$STAGED_FILES" ]; then
+	exit 0
+fi
+
+if [ -n "$PROJECT_PREFIX" ]; then
+	if ! printf '%s\n' "$STAGED_FILES" | awk -v prefix="$PROJECT_PREFIX" 'index($0, prefix) == 1 { found = 1 } END { exit !found }'; then
+		exit 0
+	fi
+fi
+
+printf '%s\n' 'pre-commit: staged changes detected, running npm run build'
+
+npm --prefix "$PROJECT_ROOT" run build
