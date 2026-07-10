@@ -66,7 +66,7 @@ onUnmounted(() => {
 							</h2>
 							<button
 								type="button"
-								class="ml-auto p-2 rounded-full bg-ios-fill text-ios-muted transition-opacity active:opacity-60"
+								class="btn-reset ml-auto p-2 rounded-full bg-ios-fill text-ios-muted transition-opacity active:opacity-60"
 								aria-label="Закрыть"
 								@click="close"
 							>

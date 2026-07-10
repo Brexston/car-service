@@ -45,7 +45,7 @@ const typeColors: Record<ServiceRecord['type'], string> = {
 			<div v-if="editable" class="flex shrink-0">
 				<button
 					type="button"
-					class="p-2 text-ios-blue transition-opacity active:opacity-60"
+					class="btn-reset p-2 text-ios-blue transition-opacity active:opacity-60"
 					aria-label="Редактировать"
 					@click.stop="emit('edit')"
 				>
@@ -53,7 +53,7 @@ const typeColors: Record<ServiceRecord['type'], string> = {
 				</button>
 				<button
 					type="button"
-					class="p-2 text-ios-red transition-opacity active:opacity-60"
+					class="btn-reset p-2 text-ios-red transition-opacity active:opacity-60"
 					aria-label="Удалить"
 					@click.stop="emit('delete')"
 				>

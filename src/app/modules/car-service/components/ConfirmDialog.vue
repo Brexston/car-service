@@ -41,7 +41,7 @@ function confirm() {
 			</button>
 			<button
 				type="button"
-				class="font-semibold rounded-ios-sm px-5 py-2.5 transition-opacity active:opacity-80"
+				class="btn-reset font-semibold rounded-ios-sm px-5 py-2.5 transition-opacity active:opacity-80"
 				:class="danger ? 'bg-ios-red text-white' : 'btn-accent'"
 				@click="confirm"
 			>

@@ -77,7 +77,7 @@ async function clearData() {
 			<div class="ios-card overflow-hidden mb-4">
 				<button
 					type="button"
-					class="w-full flex items-center gap-3 px-4 py-3.5 text-left transition-opacity active:opacity-60 hairline-b"
+					class="btn-reset w-full flex items-center gap-3 px-4 py-3.5 text-left transition-opacity active:opacity-60 hairline-b"
 					@click="exportData"
 				>
 					<Download :size="20" class="text-ios-blue shrink-0" />
@@ -86,7 +86,7 @@ async function clearData() {
 				</button>
 				<button
 					type="button"
-					class="w-full flex items-center gap-3 px-4 py-3.5 text-left transition-opacity active:opacity-60 hairline-b"
+					class="btn-reset w-full flex items-center gap-3 px-4 py-3.5 text-left transition-opacity active:opacity-60 hairline-b"
 					@click="triggerImport"
 				>
 					<Upload :size="20" class="text-ios-blue shrink-0" />
@@ -95,7 +95,7 @@ async function clearData() {
 				</button>
 				<button
 					type="button"
-					class="w-full flex items-center gap-3 px-4 py-3.5 text-left transition-opacity active:opacity-60"
+					class="btn-reset w-full flex items-center gap-3 px-4 py-3.5 text-left transition-opacity active:opacity-60"
 					@click="clearOpen = true"
 				>
 					<Trash2 :size="20" class="text-ios-red shrink-0" />
