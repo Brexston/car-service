@@ -92,11 +92,20 @@ export const useCarsStore = defineStore('cars', () => {
 	}
 
 	async function deleteCar(id: number) {
+		const deletedCar = cars.value.find(c => c.id === id);
+
 		await db.transaction('rw', [db.cars, db.records], async () => {
 			await db.records.where('carId').equals(id).delete();
 			await db.cars.delete(id);
 		});
+
+		if (selectedCarId.value === id)
+			selectedCarId.value = null;
+
 		await loadCars();
+
+		if (deletedCar?.isDefault && cars.value.length > 0)
+			await setDefaultCar(cars.value[0]!.id!);
 	}
 
 	async function updateMileageIfGreater(carId: number, mileage: number) {

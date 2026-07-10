@@ -3,6 +3,7 @@ import type { RecordType } from '../types';
 import { computed, onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import BackHeader from '../components/BackHeader.vue';
+import ConfirmDialog from '../components/ConfirmDialog.vue';
 import GlassCard from '../components/GlassCard.vue';
 import OilStatusBadge from '../components/OilStatusBadge.vue';
 import ServiceCard from '../components/ServiceCard.vue';
@@ -27,6 +28,7 @@ const quickActions: { type: RecordType; label: string; emoji: string }[] = [
 ];
 
 const loaded = ref(false);
+const deleteOpen = ref(false);
 
 onMounted(async () => {
 	await carsStore.loadCars();
@@ -42,6 +44,11 @@ function goBack() {
 
 function addRecord(type: RecordType) {
 	router.push({ name: 'add-record', params: { id: carId.value, type } });
+}
+
+async function doDelete() {
+	await carsStore.deleteCar(carId.value);
+	router.replace({ name: 'cars' });
 }
 </script>
 
@@ -102,6 +109,24 @@ function addRecord(type: RecordType) {
 					/>
 				</div>
 			</section>
+
+			<button
+				type="button"
+				class="btn-reset w-full mt-8 py-4 text-ios-red font-medium text-center transition-opacity active:opacity-60"
+				@click="deleteOpen = true"
+			>
+				Удалить автомобиль
+			</button>
 		</div>
+
+		<ConfirmDialog
+			:open="deleteOpen"
+			title="Удалить автомобиль?"
+			:message="`«${car.name}» и все записи обслуживания будут удалены без возможности восстановления.`"
+			confirm-label="Удалить"
+			danger
+			@update:open="deleteOpen = $event"
+			@confirm="doDelete"
+		/>
 	</div>
 </template>
