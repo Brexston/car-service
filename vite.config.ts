@@ -5,11 +5,12 @@ import juice from '@vituum/vite-plugin-juice';
 import autoprefixer from 'autoprefixer';
 import postcssFunctions from 'postcss-functions';
 import pxtorem from 'postcss-pxtorem';
+import UnoCSS from 'unocss/vite';
 import Unfonts from 'unplugin-fonts/vite';
 import { defineConfig } from 'vite';
+import { VitePWA } from 'vite-plugin-pwa';
 import { getAllPages, getFonts } from './config/helpers';
 import vitePluginPug from './config/plugins/pug/vite-plugin-pug';
-import { vitePluginAtomicBuild } from './config/plugins/vite-plugin-atomic-build';
 
 import {
 	em,
@@ -18,7 +19,6 @@ import {
 } from './config/postcss/functions';
 import {
 	BASE_PORT,
-	BUILD_TMP_DIR,
 	INITIAL_OUTPUT_DIR,
 	OUTPUT_DIR,
 	PROJECT_INITIAL_URL,
@@ -80,14 +80,14 @@ export default defineConfig(({ mode }) => {
 			cssMinify: IS_WATCH ? false : 'lightningcss',
 			manifest: IS_BUILD,
 			outDir: IS_PRODUCTION
-				? (IS_WATCH ? OUTPUT_DIR : BUILD_TMP_DIR)
+				? (IS_WATCH ? OUTPUT_DIR : INITIAL_OUTPUT_DIR)
 				: INITIAL_OUTPUT_DIR,
 			rollupOptions: {
 				checks: {
 					pluginTimings: false,
 				},
 				input: IS_BUILD
-					? resolve(SOURCE_DIR, 'app/main.ts')
+					? resolve(SOURCE_DIR, 'index.html')
 					: {
 							index: resolve(SOURCE_DIR, 'index.html'),
 							...PAGES,
@@ -170,7 +170,44 @@ export default defineConfig(({ mode }) => {
 			},
 		},
 		plugins: [
-			...(IS_PRODUCTION && !IS_WATCH ? [vitePluginAtomicBuild(BUILD_TMP_DIR, OUTPUT_DIR)] : []),
+			UnoCSS(),
+			VitePWA({
+				registerType: 'autoUpdate',
+				includeAssets: ['favicons/favicon.ico', 'favicons/apple-touch-icon.png'],
+				manifest: {
+					name: 'Car Service',
+					short_name: 'CarService',
+					description: 'Офлайн PWA для учёта обслуживания автомобилей',
+					theme_color: '#F2F2F4',
+					background_color: '#F2F2F4',
+					display: 'standalone',
+					orientation: 'portrait',
+					scope: BASE_URL,
+					start_url: BASE_URL,
+					icons: [
+						{
+							src: 'favicons/web-app-manifest-192x192.png',
+							sizes: '192x192',
+							type: 'image/png',
+						},
+						{
+							src: 'favicons/web-app-manifest-512x512.png',
+							sizes: '512x512',
+							type: 'image/png',
+						},
+						{
+							src: 'favicons/web-app-manifest-512x512.png',
+							sizes: '512x512',
+							type: 'image/png',
+							purpose: 'maskable',
+						},
+					],
+				},
+				workbox: {
+					globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
+					navigateFallback: 'index.html',
+				},
+			}),
 			Unfonts({
 				custom: {
 					display: 'swap',

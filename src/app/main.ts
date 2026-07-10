@@ -1,12 +1,12 @@
-/* eslint-disable perfectionist/sort-imports */
+import 'virtual:uno.css';
+import { createPinia } from 'pinia';
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './modules/car-service/router';
 
-// Import styles
-import 'unfonts.css';
-import '@styles/index.sass';
+const app = createApp(App);
 
-// Import vue app
-import APP from '@/app/app';
-
-document.addEventListener('DOMContentLoaded', () => {
-	APP.mount('#app');
-});
+app
+	.use(createPinia())
+	.use(router)
+	.mount('#app');
