@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Pencil, Trash2 } from '@lucide/vue';
 import type { ServiceRecord } from '../types';
+import { Pencil, Trash2 } from '@lucide/vue';
 import { RECORD_TYPE_LABELS } from '../types';
 import { formatDate } from '../utils/date';
 import GlassCard from './GlassCard.vue';

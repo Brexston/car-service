@@ -1,10 +1,10 @@
+import type { Car, ServiceRecord } from '../types';
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 import { db } from '../db/database';
-import type { Car, ServiceRecord } from '../types';
 import { DEFAULT_OIL_INTERVAL } from '../types';
-import { getOilInfo } from '../utils/oil';
 import { toInputDate } from '../utils/date';
+import { getOilInfo } from '../utils/oil';
 
 export const useCarsStore = defineStore('cars', () => {
 	const cars = ref<Car[]>([]);

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ChevronRight } from '@lucide/vue';
 import type { Car, OilInfo } from '../types';
+import { ChevronRight } from '@lucide/vue';
 import GlassCard from './GlassCard.vue';
 import OilStatusBadge from './OilStatusBadge.vue';
 

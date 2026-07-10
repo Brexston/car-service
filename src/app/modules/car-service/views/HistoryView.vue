@@ -1,11 +1,11 @@
 <script setup lang="ts">
+import type { ServiceRecord } from '../types';
 import { computed, onMounted, ref } from 'vue';
 import BottomNavigation from '../components/BottomNavigation.vue';
 import ConfirmDialog from '../components/ConfirmDialog.vue';
 import ModalDialog from '../components/ModalDialog.vue';
 import PageHeader from '../components/PageHeader.vue';
 import ServiceCard from '../components/ServiceCard.vue';
-import type { ServiceRecord } from '../types';
 import { useCarsStore } from '../stores/cars.store';
 import { useRecordsStore } from '../stores/records.store';
 

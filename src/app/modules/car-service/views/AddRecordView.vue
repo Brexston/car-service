@@ -1,11 +1,11 @@
 <script setup lang="ts">
+import type { RecordType } from '../types';
 import { computed, onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import BackHeader from '../components/BackHeader.vue';
-import type { RecordType } from '../types';
-import { RECORD_TYPE_LABELS } from '../types';
 import { useCarsStore } from '../stores/cars.store';
 import { useRecordsStore } from '../stores/records.store';
+import { RECORD_TYPE_LABELS } from '../types';
 import { toInputDate } from '../utils/date';
 
 const route = useRoute();

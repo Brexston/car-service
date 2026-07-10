@@ -21,7 +21,7 @@ const {
 
 const emit = defineEmits<{
 	'update:open': [value: boolean];
-	confirm: [];
+	'confirm': [];
 }>();
 
 function confirm() {

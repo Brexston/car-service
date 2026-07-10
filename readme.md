@@ -36,6 +36,10 @@ npm run build:ci
 
 ## GitHub Pages
 
-Приложение настроено для деплоя на GitHub Pages с базовым путём `/car-service/`.
+URL: https://brexston.github.io/car-service/
 
-После push в `main` workflow `.github/workflows/deploy.yml` собирает и публикует приложение.
+1. В репозитории откройте **Settings → Pages**
+2. В **Build and deployment → Source** выберите **GitHub Actions**
+3. Push в `main` запускает workflow `.github/workflows/deploy.yml`
+
+Повторный деплой вручную: **Actions → Deploy to GitHub Pages → Run workflow**

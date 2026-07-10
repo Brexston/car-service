@@ -1,6 +1,6 @@
+import type { RecordType, ServiceRecord } from '../types';
 import { defineStore } from 'pinia';
 import { db } from '../db/database';
-import type { RecordType, ServiceRecord } from '../types';
 import { useCarsStore } from './cars.store';
 
 export const useRecordsStore = defineStore('records', () => {

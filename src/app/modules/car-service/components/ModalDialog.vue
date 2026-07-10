@@ -11,7 +11,7 @@ const { open, title } = defineProps<Props>();
 
 const emit = defineEmits<{
 	'update:open': [value: boolean];
-	close: [];
+	'close': [];
 }>();
 
 function close() {

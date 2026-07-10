@@ -1,11 +1,11 @@
 <script setup lang="ts">
+import type { RecordType } from '../types';
 import { computed, onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import BackHeader from '../components/BackHeader.vue';
 import GlassCard from '../components/GlassCard.vue';
 import OilStatusBadge from '../components/OilStatusBadge.vue';
 import ServiceCard from '../components/ServiceCard.vue';
-import type { RecordType } from '../types';
 import { useCarsStore } from '../stores/cars.store';
 import { getNextActionLabel } from '../utils/oil';
 

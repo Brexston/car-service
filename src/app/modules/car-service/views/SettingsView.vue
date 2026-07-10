@@ -1,13 +1,13 @@
 <script setup lang="ts">
+import type { BackupData } from '../types';
 import { ChevronRight, Download, ExternalLink, Trash2, Upload } from '@lucide/vue';
 import { ref } from 'vue';
 import BottomNavigation from '../components/BottomNavigation.vue';
 import ConfirmDialog from '../components/ConfirmDialog.vue';
 import PageHeader from '../components/PageHeader.vue';
 import { db } from '../db/database';
-import type { BackupData } from '../types';
-import { APP_VERSION } from '../types';
 import { useCarsStore } from '../stores/cars.store';
+import { APP_VERSION } from '../types';
 
 const carsStore = useCarsStore();
 

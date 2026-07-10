@@ -1,5 +1,6 @@
-import Dexie, { type EntityTable } from 'dexie';
+import type { EntityTable } from 'dexie';
 import type { Car, ServiceRecord } from '../types';
+import Dexie from 'dexie';
 
 export class CarServiceDatabase extends Dexie {
 	cars!: EntityTable<Car, 'id'>;
