@@ -21,11 +21,20 @@ export interface ServiceRecord {
 	createdAt: string;
 }
 
+export interface ChecklistItem {
+	id?: number;
+	carId: number;
+	title: string;
+	done: boolean;
+	createdAt: string;
+}
+
 export interface BackupData {
 	version: number;
 	exportedAt: string;
 	cars: Car[];
 	records: ServiceRecord[];
+	checklistItems?: ChecklistItem[];
 }
 
 export type OilStatus = 'ok' | 'soon' | 'overdue';

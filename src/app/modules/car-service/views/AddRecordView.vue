@@ -89,7 +89,7 @@ function goBack() {
 							v-model.number="form.mileage"
 							type="number"
 							min="0"
-							class="input-field bg-ios-fill text-3xl font-bold tracking-tight"
+							class="input-field bg-ios-fill"
 							autofocus
 						>
 					</div>

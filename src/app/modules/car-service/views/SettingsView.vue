@@ -7,9 +7,11 @@ import ConfirmDialog from '../components/ConfirmDialog.vue';
 import PageHeader from '../components/PageHeader.vue';
 import { db } from '../db/database';
 import { useCarsStore } from '../stores/cars.store';
+import { useChecklistStore } from '../stores/checklist.store';
 import { APP_VERSION } from '../types';
 
 const carsStore = useCarsStore();
+const checklistStore = useChecklistStore();
 
 const clearOpen = ref(false);
 const importError = ref('');
@@ -18,12 +20,14 @@ const fileInput = ref<HTMLInputElement | null>(null);
 async function exportData() {
 	const cars = await db.cars.toArray();
 	const records = await db.records.toArray();
+	const checklistItems = await db.checklistItems.toArray();
 
 	const backup: BackupData = {
-		version: 1,
+		version: 2,
 		exportedAt: new Date().toISOString(),
 		cars,
 		records,
+		checklistItems,
 	};
 
 	const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
@@ -53,7 +57,8 @@ async function onFileSelected(event: Event) {
 		if (!data.cars || !data.records)
 			throw new Error('Неверный формат файла');
 
-		await carsStore.importData(data.cars, data.records);
+		await carsStore.importData(data.cars, data.records, data.checklistItems ?? []);
+		await checklistStore.load();
 	}
 	catch {
 		importError.value = 'Не удалось импортировать файл';
@@ -65,6 +70,7 @@ async function onFileSelected(event: Event) {
 
 async function clearData() {
 	await carsStore.clearAll();
+	await checklistStore.load();
 	clearOpen.value = false;
 }
 </script>
@@ -133,7 +139,7 @@ async function clearData() {
 			<ConfirmDialog
 				v-model:open="clearOpen"
 				title="Очистить данные?"
-				message="Все автомобили и записи будут удалены. Это действие нельзя отменить."
+				message="Все автомобили, записи и чеклисты будут удалены. Это действие нельзя отменить."
 				confirm-label="Очистить"
 				danger
 				@confirm="clearData"

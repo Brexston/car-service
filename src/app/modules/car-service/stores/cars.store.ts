@@ -1,4 +1,4 @@
-import type { Car, ServiceRecord } from '../types';
+import type { Car, ChecklistItem, ServiceRecord } from '../types';
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 import { db } from '../db/database';
@@ -94,8 +94,9 @@ export const useCarsStore = defineStore('cars', () => {
 	async function deleteCar(id: number) {
 		const deletedCar = cars.value.find(c => c.id === id);
 
-		await db.transaction('rw', [db.cars, db.records], async () => {
+		await db.transaction('rw', [db.cars, db.records, db.checklistItems], async () => {
 			await db.records.where('carId').equals(id).delete();
+			await db.checklistItems.where('carId').equals(id).delete();
 			await db.cars.delete(id);
 		});
 
@@ -118,18 +119,23 @@ export const useCarsStore = defineStore('cars', () => {
 	}
 
 	async function clearAll() {
-		await db.transaction('rw', [db.cars, db.records], async () => {
+		await db.transaction('rw', [db.cars, db.records, db.checklistItems], async () => {
 			await db.cars.clear();
 			await db.records.clear();
+			await db.checklistItems.clear();
 		});
 		cars.value = [];
 		recordsByCar.value = new Map();
 		selectedCarId.value = null;
 	}
 
-	async function importData(carsData: Car[], recordsData: ServiceRecord[]) {
+	async function importData(
+		carsData: Car[],
+		recordsData: ServiceRecord[],
+		checklistData: ChecklistItem[] = [],
+	) {
 		await clearAll();
-		await db.transaction('rw', [db.cars, db.records], async () => {
+		await db.transaction('rw', [db.cars, db.records, db.checklistItems], async () => {
 			for (const car of carsData) {
 				const { id: _id, ...rest } = car;
 				await db.cars.add(rest);
@@ -147,6 +153,13 @@ export const useCarsStore = defineStore('cars', () => {
 				const newCarId = idMap.get(oldCarId);
 				if (newCarId !== undefined)
 					await db.records.add({ ...rest, carId: newCarId });
+			}
+
+			for (const item of checklistData) {
+				const { id: _id, carId: oldCarId, ...rest } = item;
+				const newCarId = idMap.get(oldCarId);
+				if (newCarId !== undefined)
+					await db.checklistItems.add({ ...rest, carId: newCarId });
 			}
 		});
 		await loadCars();

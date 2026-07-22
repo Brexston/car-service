@@ -55,7 +55,7 @@ export default defineConfig({
 		'btn-accent': 'btn-reset bg-ios-accent text-ios-accent-text font-semibold rounded-ios-sm px-5 py-3.5 transition-opacity duration-150 active:opacity-80',
 		'btn-secondary': 'btn-reset ios-pill w-full',
 		'btn-ghost': 'btn-reset text-ios-blue font-medium px-4 py-2 rounded-ios-sm transition-opacity active:opacity-60',
-		'input-field': 'block box-border w-full max-w-full min-w-0 bg-ios-card rounded-ios-sm px-4 py-3.5 text-ios-text placeholder-ios-muted outline-none border-0',
+		'input-field': 'block box-border w-full max-w-full min-w-0 bg-ios-card rounded-ios-sm p-4 text-base text-ios-text placeholder-ios-muted outline-none border-0',
 		'page-container': 'max-w-lg mx-auto px-4 pb-[calc(5.5rem+env(safe-area-inset-bottom,0px))]',
 		'page-title': 'text-3xl font-bold text-ios-text tracking-tight',
 		'page-subtitle': 'text-ios-muted mt-1',
