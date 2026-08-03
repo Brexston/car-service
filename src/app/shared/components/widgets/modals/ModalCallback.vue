@@ -26,9 +26,6 @@ const modalData = computed(() => getModalData<TestData>('modal-callback'));
 					<p v-if="modalData?.description" class="modal__text">
 						{{ modalData.description }}
 					</p>
-					<div class="modal__content">
-						<FormContact />
-					</div>
 				</div>
 			</section>
 		</template>

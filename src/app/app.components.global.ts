@@ -1,23 +1,7 @@
 import type { App } from 'vue';
-import RootComponent from '@app/modules/RootComponent.vue';
 import { defineAsyncComponent } from 'vue';
 
 const components = [
-	{ name: 'RootComponent', component: RootComponent },
-
-	// #region CART
-	{ name: 'CartView', component: defineAsyncComponent(() => import('@app/modules/cart/components/CartView.vue')) },
-	// #endregion
-
-	// #region FORMS
-	{ name: 'FormContact', component: defineAsyncComponent(() => import('@app/modules/forms/components/FormContact.vue')) },
-	{ name: 'FormVacancy', component: defineAsyncComponent(() => import('@app/modules/forms/components/FormVacancy.vue')) },
-	// #endregion
-
-	// #region MEDIA
-	{ name: 'MediaView', component: defineAsyncComponent(() => import('@app/modules/media/components/MediaView.vue')) },
-	// #endregion
-
 	// #region INPUTS
 	{ name: 'XInputCheckbox', component: defineAsyncComponent(() => import('@app/shared/components/ui/inputs/XInputCheckbox.vue')) },
 	{ name: 'XInputCode', component: defineAsyncComponent(() => import('@app/shared/components/ui/inputs/XInputCode.vue')) },
@@ -65,11 +49,6 @@ const components = [
 
 	// #region OTHER
 	{ name: 'UiPreview', component: defineAsyncComponent(() => import('@app/shared/components/ui/XUiPreview.vue')) },
-	{ name: 'ContactsMap', component: defineAsyncComponent(() => import('@app/modules/contacts/components/ContactsMap.vue')) },
-	// #endregion
-
-	// #region USER
-	{ name: 'AuthView', component: defineAsyncComponent(() => import('@app/modules/user/components/auth/AuthView.vue')) },
 	// #endregion
 ];
 

@@ -1,9 +1,17 @@
 <script setup lang="ts">
-import type { PaginationProps } from '@app/modules/pagination/pagination.types.ts';
 import XIcon from '@app/shared/components/ui/XIcon.vue';
 import { computed } from 'vue';
 
-interface Props extends PaginationProps {}
+interface Props {
+	totalItems: number;
+	limitItems: number;
+	pageCurrent: number;
+	showShowMore?: boolean;
+	maxButtons?: number;
+	showNavigation?: boolean;
+	showEllipsis?: boolean;
+	theme?: 'default' | 'light';
+}
 
 const {
 	totalItems,
