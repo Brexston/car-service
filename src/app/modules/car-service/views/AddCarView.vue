@@ -58,11 +58,6 @@ function goBack() {
 					</div>
 
 					<div class="hairline-t pt-4">
-						<label class="block text-xs text-ios-muted mb-1.5 uppercase tracking-wide">Дата покупки</label>
-						<input v-model="form.purchaseDate" type="date" class="input-field bg-ios-fill">
-					</div>
-
-					<div class="hairline-t pt-4">
 						<label class="block text-xs text-ios-muted mb-1.5 uppercase tracking-wide">Пробег при покупке, км</label>
 						<input
 							v-model.number="form.purchaseMileage"

@@ -20,7 +20,7 @@ const emit = defineEmits<{
 	<GlassCard clickable padding="lg" @click="emit('click')">
 		<div class="flex items-center justify-between gap-3">
 			<div class="flex-1 min-w-0">
-				<h3 class="text-base font-semibold text-ios-text truncate">
+				<h3 class="text-base font-semibold text-ios-text truncate m-0">
 					{{ car.name }}
 				</h3>
 				<p class="text-sm text-ios-muted mt-0.5">

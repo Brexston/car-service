@@ -1,0 +1,104 @@
+@import 'base/variables'
+@import 'shared/ui/icon'
+@import 'shared/ui/inputs/default-input'
+@import 'shared/ui/inputs/input'
+
+\:root
+	--dp-font-family: var(--font-family)
+	--dp-border-radius: var(--radius-l)
+	--dp-cell-border-radius: var(--radius-m)
+	--dp-common-transition: all 0.3s ease-in
+	--dp-button-icon-height: 16px
+	--dp-cell-size: 40px
+	--dp-cell-padding: 0
+	--dp-menu-min-width: 320px
+	--dp-row-margin: 4px 0
+	--dp-menu-padding: fluid(20, 8)
+	--dp-font-size: 16px
+	--dp-preview-font-size: 16px
+	--dp-time-font-size: 16px
+
+.default-input
+	--di-font-size: 1rem
+	--di-line-height: 1.5
+	--di-py: 1rem
+	--di-px: 1rem
+	--di-min-height: 0
+	--di-color: #0b0b0c
+	--di-placeholder-color: #8e8e93
+	--di-bg: #ececf0
+	--di-bg-hover: #ececf0
+	--di-bg-focus: #ececf0
+	--di-border-color: transparent
+	--di-border-color-hover: transparent
+	--di-border-color-active: transparent
+	--di-border-color-focus: transparent
+	--di-border-width: 0
+	--di-border-radius: 14px
+	--di-icon-color: #8e8e93
+
+	&__input
+		min-height: 0
+
+.input
+	&__input
+		box-sizing: border-box
+		outline: none
+
+		&:focus
+			outline: none
+			font-size: 1rem
+
+.dp
+
+	&__main
+		width: 100%
+
+	&__input_wrap
+		width: 100%
+
+	&--theme-light
+		--dp-background-color: var(--color-neutral-100)
+		--dp-hover-color: var(--color-neutral-200)
+		--dp-disabled-color: var(--di-bg-disabled)
+		--dp-text-color: var(--color-neutral-900)
+		--dp-hover-text-color: var(--color-neutral-900)
+		--dp-disabled-color-text: var(--di-color-disabled)
+		--dp-primary-color: #0b0b0c
+		--dp-primary-text-color: #fff
+		--dp-primary-disabled-color: var(--di-color-disabled)
+		--dp-border-color: transparent
+		--dp-border-color-hover: transparent
+		--dp-border-color-focus: transparent
+		--dp-menu-border-color: rgba(60, 60, 67, 0.12)
+		--dp-scroll-bar-background: var(--scrollbar-color-background)
+		--dp-scroll-bar-color: var(--scrollbar-color-thumb)
+		--dp-success-color: var(--color-positive)
+		--dp-success-color-disabled: var(--color-positive)
+		--dp-icon-color: #8e8e93
+		--dp-hover-icon-color: #0b0b0c
+		--dp-danger-color: var(--color-negative)
+		width: 100%
+
+	&--overlay-container
+		scrollbar-width: thin
+
+	&--calendar-header
+		color: var(--color-neutral-900)
+		font-weight: 400
+
+	&--calendar-header-item
+		display: flex
+		align-items: center
+		justify-content: center
+
+	&--time-picker-inline-container
+		width: 100%
+		padding-bottom: 10px
+
+	&--input-icons
+		position: absolute
+		right: var(--di-px)
+		width: var(--di-icon-size)
+		height: var(--di-icon-size)
+		padding: 0

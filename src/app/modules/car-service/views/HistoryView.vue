@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { ServiceRecord } from '../types';
+import XInputDate from '@app/shared/components/ui/inputs/XInputDate.vue';
 import { computed, onMounted, ref } from 'vue';
 import BottomNavigation from '../components/BottomNavigation.vue';
 import ConfirmDialog from '../components/ConfirmDialog.vue';
@@ -116,7 +117,7 @@ async function saveEdit() {
 				<form class="space-y-3" @submit.prevent="saveEdit">
 					<div>
 						<label class="block text-xs text-ios-muted mb-1.5 uppercase tracking-wide">Дата</label>
-						<input v-model="editForm.date" type="date" class="input-field bg-ios-fill">
+						<XInputDate v-model="editForm.date" date-mask="yyyy-MM-dd" />
 					</div>
 					<div>
 						<label class="block text-xs text-ios-muted mb-1.5 uppercase tracking-wide">Пробег, км</label>

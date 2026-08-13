@@ -13,6 +13,26 @@ export default defineConfig({
 		presetIcons(),
 	],
 	transformers: [transformerDirectives()],
+	preflights: [
+		{
+			getCSS: () => `
+				html,
+				body {
+					margin: 0;
+					padding: 0;
+				}
+
+				body {
+					min-height: 100%;
+					background-color: #F2F2F4;
+					color: #0B0B0C;
+					font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+					-webkit-text-size-adjust: 100%;
+					text-size-adjust: 100%;
+				}
+			`,
+		},
+	],
 	theme: {
 		colors: {
 			ios: {

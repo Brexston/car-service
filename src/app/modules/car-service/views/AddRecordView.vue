@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { RecordType } from '../types';
+import XInputDate from '@app/shared/components/ui/inputs/XInputDate.vue';
 import { computed, onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import BackHeader from '../components/BackHeader.vue';
@@ -80,7 +81,7 @@ function goBack() {
 				<div class="ios-card p-4 space-y-4">
 					<div>
 						<label class="block text-xs text-ios-muted mb-1.5 uppercase tracking-wide">Дата</label>
-						<input v-model="form.date" type="date" class="input-field bg-ios-fill">
+						<XInputDate v-model="form.date" date-mask="yyyy-MM-dd" />
 					</div>
 
 					<div class="hairline-t pt-4">

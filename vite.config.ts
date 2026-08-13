@@ -132,11 +132,7 @@ export default defineConfig(({ mode }) => {
 			devSourcemap: IS_DEV,
 			preprocessorOptions: {
 				sass: {
-					additionalData: `
-						$isDev: ${IS_DEV}\n
-						$BASE_URL: "${BASE_URL}"\n
-						@import '@styles/base/mixins/_index.sass'\n
-					`,
+					additionalData: `$isDev: ${IS_DEV}\n$BASE_URL: "${BASE_URL}"\n@import '@styles/base/mixins/_index.sass'\n`,
 					silenceDeprecations: ['import'],
 				},
 			},
