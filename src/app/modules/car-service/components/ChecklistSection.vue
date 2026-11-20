@@ -251,7 +251,7 @@ async function removeItem(id: number) {
 							<input
 								v-model="childDrafts[item.id!]"
 								type="text"
-								class="input-field bg-ios-card flex-1 text-sm"
+								class="input-field bg-ios-card flex-1"
 								placeholder="Подпункт..."
 								maxlength="120"
 							>
