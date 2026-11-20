@@ -204,12 +204,12 @@ async function removeItem(id: number) {
 
 					<div
 						v-if="isExpanded(item.id!)"
-						class="pb-2"
+						class="ml-10 mr-3 mb-2.5 pl-3 border-l-2 border-ios-muted/40 bg-ios-fill/60 rounded-r-ios-sm py-1"
 					>
 						<div
 							v-for="child in childrenOf(item.id!)"
 							:key="child.id"
-							class="flex items-center gap-2 pl-11 pr-3 py-2"
+							class="flex items-center gap-2 py-2 pr-1"
 						>
 							<button
 								type="button"
@@ -245,19 +245,19 @@ async function removeItem(id: number) {
 						</div>
 
 						<form
-							class="flex gap-2 pl-11 pr-3 pt-1"
+							class="flex gap-2 py-1 pr-1"
 							@submit.prevent="addChild(item.id!)"
 						>
 							<input
 								v-model="childDrafts[item.id!]"
 								type="text"
-								class="input-field bg-ios-fill flex-1 text-sm"
+								class="input-field bg-ios-card flex-1 text-sm"
 								placeholder="Подпункт..."
 								maxlength="120"
 							>
 							<button
 								type="submit"
-								class="btn-reset shrink-0 w-10 h-10 rounded-ios-sm bg-ios-fill text-ios-accent flex items-center justify-center transition-opacity active:opacity-80 disabled:opacity-40"
+								class="btn-reset shrink-0 w-10 h-10 rounded-ios-sm bg-ios-card text-ios-accent flex items-center justify-center transition-opacity active:opacity-80 disabled:opacity-40"
 								:disabled="!(childDrafts[item.id!] ?? '').trim() || addingChildId === item.id"
 								aria-label="Добавить подпункт"
 							>
@@ -334,12 +334,12 @@ async function removeItem(id: number) {
 
 				<div
 					v-if="isZone(item) && isExpanded(item.id!)"
-					class="pb-2"
+					class="ml-10 mr-3 mb-2.5 pl-3 border-l-2 border-ios-muted/40 bg-ios-fill/60 rounded-r-ios-sm py-1"
 				>
 					<div
 						v-for="child in childrenOf(item.id!)"
 						:key="child.id"
-						class="flex items-center gap-2 pl-12 pr-4 py-2"
+						class="flex items-center gap-2 py-2 pr-1"
 					>
 						<button
 							type="button"
