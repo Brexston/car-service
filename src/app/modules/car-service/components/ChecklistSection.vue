@@ -171,7 +171,7 @@ async function removeItem(id: number) {
 							class="btn-reset flex-1 min-w-0 text-left flex items-center gap-2"
 							@click="toggleExpand(item.id!)"
 						>
-							<span class="flex-1 min-w-0 text-ios-text leading-snug">
+							<span class="flex-1 min-w-0 text-base font-medium text-ios-text leading-snug">
 								{{ item.title }}
 							</span>
 							<span
@@ -228,7 +228,7 @@ async function removeItem(id: number) {
 							</button>
 
 							<span
-								class="flex-1 min-w-0 text-sm text-ios-text leading-snug"
+								class="flex-1 min-w-0 text-base text-ios-text leading-snug"
 								:class="child.done && 'line-through text-ios-muted'"
 							>
 								{{ child.title }}
@@ -298,7 +298,7 @@ async function removeItem(id: number) {
 						class="btn-reset flex-1 min-w-0 text-left flex items-center gap-2"
 						@click="isZone(item) ? toggleExpand(item.id!) : undefined"
 					>
-						<span class="flex-1 min-w-0 text-ios-text leading-snug line-through text-ios-muted">
+						<span class="flex-1 min-w-0 text-base font-medium text-ios-text leading-snug line-through text-ios-muted">
 							{{ item.title }}
 						</span>
 						<span
@@ -358,7 +358,7 @@ async function removeItem(id: number) {
 						</button>
 
 						<span
-							class="flex-1 min-w-0 text-sm text-ios-text leading-snug"
+							class="flex-1 min-w-0 text-base text-ios-text leading-snug"
 							:class="child.done && 'line-through text-ios-muted'"
 						>
 							{{ child.title }}
