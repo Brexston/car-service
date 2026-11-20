@@ -23,7 +23,7 @@ async function exportData() {
 	const checklistItems = await db.checklistItems.toArray();
 
 	const backup: BackupData = {
-		version: 2,
+		version: 3,
 		exportedAt: new Date().toISOString(),
 		cars,
 		records,

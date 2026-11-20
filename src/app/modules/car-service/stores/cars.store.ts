@@ -156,8 +156,11 @@ export const useCarsStore = defineStore('cars', () => {
 			}
 
 			const orderCounters = new Map<number, number>();
+			const checklistIdMap = new Map<number, number>();
+			const pendingParentLinks: { newId: number; oldParentId: number }[] = [];
+
 			for (const item of checklistData) {
-				const { id: _id, carId: oldCarId, ...rest } = item;
+				const { id: oldId, carId: oldCarId, parentId: oldParentId, ...rest } = item;
 				const newCarId = idMap.get(oldCarId);
 				if (newCarId === undefined)
 					continue;
@@ -167,7 +170,24 @@ export const useCarsStore = defineStore('cars', () => {
 				if (!hasOrder)
 					orderCounters.set(newCarId, order + 1);
 
-				await db.checklistItems.add({ ...rest, carId: newCarId, order });
+				const newId = await db.checklistItems.add({
+					...rest,
+					carId: newCarId,
+					order,
+					parentId: null,
+				}) as number;
+
+				if (oldId !== undefined)
+					checklistIdMap.set(oldId, newId);
+
+				if (oldParentId != null)
+					pendingParentLinks.push({ newId, oldParentId });
+			}
+
+			for (const link of pendingParentLinks) {
+				const newParentId = checklistIdMap.get(link.oldParentId);
+				if (newParentId !== undefined)
+					await db.checklistItems.update(link.newId, { parentId: newParentId });
 			}
 		});
 		await loadCars();

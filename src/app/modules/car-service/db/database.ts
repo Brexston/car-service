@@ -48,6 +48,12 @@ export class CarServiceDatabase extends Dexie {
 				));
 			}
 		});
+
+		this.version(4).stores({
+			cars: '++id, name, isDefault, createdAt',
+			records: '++id, carId, type, date, mileage, createdAt',
+			checklistItems: '++id, carId, done, createdAt, order, parentId',
+		});
 	}
 }
 

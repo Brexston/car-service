@@ -28,6 +28,7 @@ export interface ChecklistItem {
 	done: boolean;
 	order: number;
 	createdAt: string;
+	parentId?: number | null;
 }
 
 export interface BackupData {
