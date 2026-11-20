@@ -26,6 +26,7 @@ export interface ChecklistItem {
 	carId: number;
 	title: string;
 	done: boolean;
+	order: number;
 	createdAt: string;
 }
 

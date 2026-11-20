@@ -9,7 +9,7 @@ function sortChecklist(items: ChecklistItem[]): ChecklistItem[] {
 		if (a.done !== b.done)
 			return a.done ? 1 : -1;
 
-		return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+		return a.order - b.order;
 	});
 }
 
@@ -26,7 +26,7 @@ export const useChecklistStore = defineStore('checklist', () => {
 				return { item, carName: car?.name ?? 'Автомобиль' };
 			})
 			.sort((a, b) => a.carName.localeCompare(b.carName, 'ru')
-				|| new Date(a.item.createdAt).getTime() - new Date(b.item.createdAt).getTime());
+				|| a.item.order - b.item.order);
 	});
 
 	async function load() {
@@ -43,6 +43,13 @@ export const useChecklistStore = defineStore('checklist', () => {
 		return sortChecklist(items.value.filter(item => item.carId === carId));
 	}
 
+	async function nextOrder(carId: number) {
+		const carItems = items.value.filter(item => item.carId === carId);
+		if (carItems.length === 0)
+			return 0;
+		return Math.max(...carItems.map(item => item.order)) + 1;
+	}
+
 	async function add(carId: number, title: string) {
 		const trimmed = title.trim();
 		if (!trimmed)
@@ -52,6 +59,7 @@ export const useChecklistStore = defineStore('checklist', () => {
 			carId,
 			title: trimmed,
 			done: false,
+			order: await nextOrder(carId),
 			createdAt: new Date().toISOString(),
 		});
 		await load();
@@ -62,7 +70,21 @@ export const useChecklistStore = defineStore('checklist', () => {
 		if (!item)
 			return;
 
-		await db.checklistItems.update(id, { done: !item.done });
+		const done = !item.done;
+		const patch: Partial<ChecklistItem> = { done };
+		if (!done)
+			patch.order = await nextOrder(item.carId);
+
+		await db.checklistItems.update(id, patch);
+		await load();
+	}
+
+	async function reorder(_carId: number, orderedIds: number[]) {
+		await db.transaction('rw', db.checklistItems, async () => {
+			await Promise.all(orderedIds.map((id, index) =>
+				db.checklistItems.update(id, { order: index }),
+			));
+		});
 		await load();
 	}
 
@@ -79,6 +101,7 @@ export const useChecklistStore = defineStore('checklist', () => {
 		getByCar,
 		add,
 		toggle,
+		reorder,
 		remove,
 	};
 });

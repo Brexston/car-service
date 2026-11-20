@@ -155,11 +155,19 @@ export const useCarsStore = defineStore('cars', () => {
 					await db.records.add({ ...rest, carId: newCarId });
 			}
 
+			const orderCounters = new Map<number, number>();
 			for (const item of checklistData) {
 				const { id: _id, carId: oldCarId, ...rest } = item;
 				const newCarId = idMap.get(oldCarId);
-				if (newCarId !== undefined)
-					await db.checklistItems.add({ ...rest, carId: newCarId });
+				if (newCarId === undefined)
+					continue;
+
+				const hasOrder = typeof rest.order === 'number';
+				const order = hasOrder ? rest.order : (orderCounters.get(newCarId) ?? 0);
+				if (!hasOrder)
+					orderCounters.set(newCarId, order + 1);
+
+				await db.checklistItems.add({ ...rest, carId: newCarId, order });
 			}
 		});
 		await loadCars();
